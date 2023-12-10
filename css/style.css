@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    width: 1128px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 24px 0;
+}
+
+.gallery-item{
+    cursor: pointer;
+}
+
+
+.gallery-image{
+    display: block;
+    width: 360px;
+    height: 200px;
+}
+
+.basicLightbox{
+    cursor: pointer;
+}
+
+.basicLightbox__placeholder>img:first-child:last-child{
+    width: 1112px;
+    max-height: 640px;
+    aspect-ratio: 1112/640;
+}
