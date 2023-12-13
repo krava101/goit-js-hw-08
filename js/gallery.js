@@ -89,7 +89,7 @@ gallery.addEventListener("click", (event) => {
     const modal = basicLightbox.create(`<img src="${event.target.dataset.source}" alt="${event.target.alt}">`);
     modal.show();
 
-    function keyClick(event, x) {
+    function keyClick(event) {
       if (event.code !== "Escape") { return } else {
         modal.close();
         document.removeEventListener('keydown', keyClick);
