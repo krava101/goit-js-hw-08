@@ -67,31 +67,35 @@ const images = [
 const gallery = document.querySelector(".gallery");
 
 const str = images.reduce((acc, e) => acc + `
-    <li class="gallery-item">
-      <a class="gallery-link" href="${e.original}">
-        <img
-          class="gallery-image"
-          src="${e.preview}"
-          data-source="${e.original}"
-          alt="${e.description}"
-        />
-      </a>
-    </li>`,
-    '');
+  <li class="gallery-item">
+    <a class="gallery-link" href="${e.original}">
+      <img
+        class="gallery-image"
+        src="${e.preview}"
+        data-source="${e.original}"
+        alt="${e.description}"
+      />
+    </a>
+  </li>`,
+  '');
 
 gallery.insertAdjacentHTML("afterbegin", str);
 
 gallery.addEventListener("click", (event) => {
-    if (event.target.dataset.source) {
-        event.preventDefault();
-        const modal = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
-        modal.show();
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") { 
+    return;
+  } else {
+    const modal = basicLightbox.create(`<img src="${event.target.dataset.source}" alt="${event.target.alt}">`);
+    modal.show();
 
-        if (modal.show()) {
-            document.addEventListener('keydown', event => {
-                if (event.code === "Escape") { modal.close(); }
-            });
-        }
+    function keyClick(event, x) {
+      if (event.code !== "Escape") { return } else {
+        modal.close();
+        document.removeEventListener('keydown', keyClick);
+      }
     }
+    document.addEventListener('keydown', keyClick);
+  }
 });
 
